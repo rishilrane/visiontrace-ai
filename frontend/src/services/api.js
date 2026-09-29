@@ -1,7 +1,7 @@
 /**
  * API service for communicating with FastAPI backend.
  */
-
+const API_BASE = 'https://visiontrace-ai.onrender.com/api';
 const API_BASE = 'https://visiontrace-ai.onrender.com/api';
 
 export async function checkHealth() {

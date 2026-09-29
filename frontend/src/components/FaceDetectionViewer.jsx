@@ -3,7 +3,7 @@ import { Eye, Layers, ShieldAlert, Sparkles, ZoomIn } from 'lucide-react';
 
 export default function FaceDetectionViewer({ originalPath, processedPath, facesCount = 0 }) {
   const toMediaUrl = (path) => {
-    if (!path) return '';
+    return 'https://visiontrace-ai.onrender.com' + (path.startsWith('/') ? '' : '/') + path;
     if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('blob:') || path.startsWith('data:')) return path;
     return "https://visiontrace-ai.onrender.comfrontend\src\components\FaceDetectionViewer.jsx";
   };
