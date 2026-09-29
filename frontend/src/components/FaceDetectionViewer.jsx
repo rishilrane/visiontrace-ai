@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Eye, Layers, ShieldAlert, Sparkles, ZoomIn } from 'lucide-react';
 
 export default function FaceDetectionViewer({ originalPath, processedPath, facesCount = 0 }) {
+  const toMediaUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('blob:') || path.startsWith('data:')) return path;
+    return "https://visiontrace-ai.onrender.comfrontend\src\components\FaceDetectionViewer.jsx";
+  };
   const [activeView, setActiveView] = useState('annotated'); // 'annotated' | 'original' | 'split'
 
   const hasOverlay = Boolean(processedPath);
@@ -69,7 +74,7 @@ export default function FaceDetectionViewer({ originalPath, processedPath, faces
               </span>
               <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950/80 flex items-center justify-center max-h-[380px]">
                 <img
-                  src={originalPath}
+                  src={toMediaUrl(originalPath)}
                   alt="Original Media"
                   className="max-h-[380px] w-auto object-contain"
                 />
@@ -81,7 +86,7 @@ export default function FaceDetectionViewer({ originalPath, processedPath, faces
               </span>
               <div className="rounded-xl overflow-hidden border border-cyan-500/30 bg-slate-950/80 flex items-center justify-center max-h-[380px] shadow-lg shadow-cyan-500/5">
                 <img
-                  src={processedPath}
+                  src={toMediaUrl(processedPath)}
                   alt="Annotated Evidence"
                   className="max-h-[380px] w-auto object-contain"
                 />
@@ -91,7 +96,7 @@ export default function FaceDetectionViewer({ originalPath, processedPath, faces
         ) : (
           <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950/90 flex items-center justify-center min-h-[320px] max-h-[460px] p-2 relative group">
             <img
-              src={activeView === 'original' || !hasOverlay ? originalPath : processedPath}
+              src={toMediaUrl(activeView === 'original' || !hasOverlay ? originalPath : processedPath)}
               alt="Analyzed Media"
               className="max-h-[440px] w-auto object-contain rounded-lg"
             />
@@ -118,3 +123,4 @@ export default function FaceDetectionViewer({ originalPath, processedPath, faces
     </div>
   );
 }
+
